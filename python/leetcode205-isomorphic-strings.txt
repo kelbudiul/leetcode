@@ -1,0 +1,12 @@
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        mappingsST, mappingsTS = {}, {}
+
+        for i in range(len(s)):
+            char1, char2 = s[i], t[i]
+            if ((char1 in mappingsST and mappingsST[char1] != char2) or 
+            char2 in mappingsTS and mappingsTS[char2] != char1):
+                return False
+            mappingsST[char1] = char2
+            mappingsTS[char2] = char1
+        return True

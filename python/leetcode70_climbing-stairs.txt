@@ -1,0 +1,21 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        cache = {0: 0, 1: 1}
+        def fibonacci_of(n):
+            if n in cache:  # Base case
+                return cache[n]
+            cache[n] = fibonacci_of(n - 1) + fibonacci_of(n - 2)
+            return cache[n]
+        return fibonacci_of(n+1) 
+============================================
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n in {0, 1}:
+            return n
+        first, second = 1, 1
+        for _ in range(n - 1):
+            tmp = second
+            second = first + second
+            first = tmp
+        return second

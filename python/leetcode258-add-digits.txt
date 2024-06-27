@@ -1,0 +1,15 @@
+class Solution:
+    def sumOfDigits(self, n: int) -> int:
+        output = 0
+        while n:
+            digit = n % 10
+            output += digit
+            n = n // 10
+        return output
+    def addDigits(self, num: int) -> int:
+        while num:
+            num = self.sumOfDigits(num)
+            if num // 10 == 0:
+                return num
+
+        return num

@@ -1,0 +1,66 @@
+func countLettersAndDigits(s string) (int, int) {
+	var letterCount, digitCount int
+
+	for _, char := range s {
+		if unicode.IsLetter(char) {
+			letterCount++
+		} else if unicode.IsDigit(char) {
+			digitCount++
+		}
+	}
+
+	return letterCount, digitCount
+}
+
+func separateDigitsAndLetters(s string) (digits []rune, letters []rune) {
+	for _, char := range s {
+		if unicode.IsDigit(char) {
+			digits = append(digits, char)
+		} else if unicode.IsLetter(char) {
+			letters = append(letters, char)
+		}
+	}
+	return digits, letters
+}
+
+func reformat(s string) string {
+    if len(s) == 1 {
+        return s
+    }
+    letterCount, digitCount := countLettersAndDigits(s)
+    if letterCount == 0 || digitCount == 0 {
+        return ""
+    }
+    diff := letterCount - digitCount
+    if diff == -1 || diff == 0 || diff == 1 {
+        digits, letters := separateDigitsAndLetters(s)
+    // Construct the reformatted string
+	var result []rune
+	var i, j int
+
+	// Interleave letters and digits
+	for i < len(letters) && j < len(digits) {
+		if len(letters) > len(digits) {
+			result = append(result, letters[i], digits[j])
+		} else {
+			result = append(result, digits[j], letters[i])
+		}
+		i++
+		j++
+	}
+
+	// Append any remaining characters
+	for i < len(letters) {
+		result = append(result, letters[i])
+		i++
+	}
+
+	for j < len(digits) {
+		result = append(result, digits[j])
+		j++
+	}
+	return string(result)
+
+    }
+    return ""
+}

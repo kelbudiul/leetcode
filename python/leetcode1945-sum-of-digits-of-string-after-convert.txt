@@ -1,0 +1,12 @@
+class Solution:
+    def getLucky(self, s: str, k: int) -> int:
+        conversion = "".join((str(ord(c)-96) for c in s))
+        print(conversion)
+        while k:
+            number = 0
+            for c in conversion:
+                number += int(c)
+            conversion = str(number)
+            k -= 1
+
+        return int(number)

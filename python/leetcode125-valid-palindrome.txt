@@ -1,0 +1,13 @@
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        if s == " " :
+            return True
+        for c in "@:,;.#_-()}\{[]`'\"?! ":
+            s = s.replace(c, "")
+        s = s.lower()
+        reverse = s[::-1]
+        reverse = reverse.lower()
+
+        return reverse == s
+        
+        

@@ -1,0 +1,14 @@
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        if len(s.split()) != len(pattern):
+            return False
+        mappingsPS, mappingsSP = {}, {}
+        for char1, word2 in zip(pattern, s.split()):
+            if ((char1 in mappingsPS and mappingsPS[char1] != word2) or
+            (word2 in mappingsSP and mappingsSP[word2] != char1)):
+                return False
+
+            mappingsPS[char1] = word2
+            mappingsSP[word2] = char1 
+
+        return True

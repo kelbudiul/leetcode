@@ -1,0 +1,9 @@
+class Solution:
+    def countKDifference(self, nums: List[int], k: int) -> int:
+        counter = 0
+        for i, value_i in enumerate(nums):
+            for j, value_j in enumerate(nums):
+                if i < j and abs(nums[i] - nums[j]) == k:
+                    counter += 1
+        
+        return counter

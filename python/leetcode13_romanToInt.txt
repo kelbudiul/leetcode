@@ -1,0 +1,51 @@
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        roman = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        }
+
+        num = 0
+        last = "I"
+
+        for numeral in s[::-1]:
+            if roman[numeral] < roman[last]:
+                num -= roman[numeral]
+            else:
+                num += roman[numeral]
+
+            last = numeral
+
+        return num
+
+#### Second Variant (Memory usage higher)
+def romanToInt(self, s: str) -> int:
+    roman = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    }
+
+    special_case = {
+        'IV': 'IIII',
+        'IX': 'VIIII',
+        'XL': 'XXXX',
+        'XC': 'LXXXX',
+        'CD': 'CCCC',
+        'CM': 'DCCCC'
+    }
+
+    for k, v in special_case.items():
+        s = s.replace(k, v)
+
+    return sum([roman[numeral] for numeral in s])
+	

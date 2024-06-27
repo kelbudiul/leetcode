@@ -1,0 +1,9 @@
+class Solution:
+    def countPairs(self, nums: List[int], k: int) -> int:
+        counter = 0
+        for index_i, value_i in enumerate(nums):
+            for index_j, value_j in enumerate(nums):
+                if nums[index_i] == nums[index_j] and index_i < index_j and ((index_i*index_j) % k ) == 0:
+                    counter += 1
+        
+        return counter

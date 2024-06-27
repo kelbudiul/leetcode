@@ -1,0 +1,12 @@
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        charFreq = Counter(magazine)
+        # charFreq = {}
+        # for c in magazine:
+        #     charFreq[c] += 1
+        for c in ransomNote:
+            if charFreq[c] == 0:
+                return False
+            else:
+                charFreq[c] -= 1
+        return True
