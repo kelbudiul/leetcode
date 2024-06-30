@@ -1,0 +1,33 @@
+char* baseNeg2(int n) {
+    if (n == 0) {
+        char* zero = (char*)malloc(2);
+        zero[0] = '0';
+        zero[1] = '\0';
+        return zero;
+    }
+
+    char* result = (char*)malloc(64);
+    int index = 0;
+
+    while (n != 0) {
+        int remainder = n % -2;
+        n /= -2;
+
+        if (remainder < 0) {
+            remainder += 2;
+            n += 1;
+        }
+
+        result[index++] = remainder + '0';
+    }
+
+    // Reverse the string since the calculation gives the least significant bit first
+    for (int i = 0; i < index / 2; ++i) {
+        char temp = result[i];
+        result[i] = result[index - i - 1];
+        result[index - i - 1] = temp;
+    }
+
+    result[index] = '\0';
+    return result;
+}
