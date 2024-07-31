@@ -1,0 +1,28 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def smallestFromLeaf(self, root: TreeNode) -> str:
+        def dfs(node, path):
+            if not node:
+                return
+            
+            # Convert the node's value to its corresponding letter
+            path.append(chr(node.val + ord('a')))
+            
+            if not node.left and not node.right:  # If it's a leaf node
+                # Reverse the path and compare with the current smallest
+                candidate = ''.join(reversed(path))
+                self.smallest = min(self.smallest, candidate)
+            
+            dfs(node.left, path)
+            dfs(node.right, path)
+            
+            path.pop()  # Backtrack
+        
+        self.smallest = '~'  # Initialize with a character that comes after 'z'
+        dfs(root, [])
+        return self.smallest
